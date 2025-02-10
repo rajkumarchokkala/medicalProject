@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+<<<<<<< HEAD
 @RestController
 public class RegisterAndLoginController {
 
@@ -34,10 +35,24 @@ public class RegisterAndLoginController {
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         User registeredUser = userService.registerUser(user);
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+=======
+
+public class RegisterAndLoginController {
+   
+   @Autowired
+   private UserService userService;
+
+    @PostMapping("/api/user/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        // register user and return the registered user with status code 201 created
+        return ResponseEntity.HttpStatus(201).body(userService.registerUser(user));
+
+>>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
     }
 
     @PostMapping("/api/user/login")
     public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest loginRequest) {
+<<<<<<< HEAD
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
@@ -54,3 +69,18 @@ public class RegisterAndLoginController {
         return ResponseEntity.ok(new LoginResponse(token, user.getUsername(), user.getEmail(), user.getRole()));
     }
 }
+=======
+        // login user and return the login response with status code 200 ok
+        // if authentication fails, return status code 401 unauthorized
+        try
+        {
+        return ResponseEntity.HttpStatus(200).body(userService.loginUser(loginRequest));
+        }
+        catch(Exception e)
+        {
+            return ResponseEntity.HttpStatus(401).build();
+        }
+         
+    }
+}
+>>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e

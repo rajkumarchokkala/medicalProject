@@ -19,5 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 public class SecurityConfig {
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
 }
