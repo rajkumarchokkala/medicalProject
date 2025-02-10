@@ -14,7 +14,7 @@ public class Equipment {
     private String description;
  
     @ManyToOne
-    @JoinColumn(name="hospital_id",referencedColumnName="id")
+    @JoinColumn(name="hospital_id")
     private Hospital hospital;
  
  public Equipment()

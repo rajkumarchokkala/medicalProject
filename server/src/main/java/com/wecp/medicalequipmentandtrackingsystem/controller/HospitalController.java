@@ -69,7 +69,7 @@ public class HospitalController {
     @PostMapping("/api/hospital/order")
     public ResponseEntity<Order> placeOrder(@RequestParam Long equipmentId, @RequestBody Order order) 
     {
-        // place order for the equipment and return the placed order with status code 201 = CREATED;
-        return ResponseEntity.status(201).body(orderService.placeOrder(equipmentId,order));
+        Order placedOrder = orderService.placeOrder(equipmentId, order);
+        return new ResponseEntity<>(placedOrder,HttpStatus.CREATED);
     }
 }

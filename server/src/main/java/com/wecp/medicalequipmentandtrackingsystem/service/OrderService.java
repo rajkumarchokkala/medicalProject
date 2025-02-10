@@ -36,16 +36,14 @@ public class OrderService
         }
         return null;
     }
-    
-    public Order placeOrder(Long equipmentId,Order order)
+
+    public Order placeOrder(Long equipmentId, Order order) 
     {
         Equipment equipment=equipmentRepository.findById(equipmentId).orElse(null);
-        if(equipment!=null)
-        {
-            order.setEquipment(equipment);
-            return orderRepository.save(order);
-        }
-        return null;
+        order.setEquipment(equipment);
+        order.setOrderDate(new Date());
+        order.setStatus("Initiated");
+        return orderRepository.save(order);
     }
 }
 

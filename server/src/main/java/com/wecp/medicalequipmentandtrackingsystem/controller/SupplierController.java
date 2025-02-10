@@ -19,8 +19,8 @@ public class SupplierController
     @GetMapping("/api/supplier/orders")
     public ResponseEntity<List<Order>> getAllOrders() 
     {
-        return ResponseEntity.status(200).body(orderService.getAllOrders());
-        // get all order and return it status code 200 OK
+        List<Order> orders = orderService.getAllOrders();
+        return ResponseEntity.status(HttpStatus.OK).body(orders);
     }
  
     @PutMapping("/api/supplier/order/update/{orderId}")

@@ -1,5 +1,6 @@
 package com.wecp.medicalequipmentandtrackingsystem.jwt;
 
+
 import com.wecp.medicalequipmentandtrackingsystem.entitiy.User;
 import com.wecp.medicalequipmentandtrackingsystem.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -8,6 +9,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class JwtUtil {
 
     @Autowired
     public JwtUtil(UserRepository userRepository) {
-       
+        this.userRepository = userRepository;
     }
 
     private final String secret = "secretKey000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
@@ -32,6 +34,8 @@ public class JwtUtil {
         User user = userRepository.findByUsername(username);
 
         Map<String, Object> claims = new HashMap<>();
+        claims.put("sub", username);
+
         // Assign role based on user type
         claims.put("role", user.getRole());
 
