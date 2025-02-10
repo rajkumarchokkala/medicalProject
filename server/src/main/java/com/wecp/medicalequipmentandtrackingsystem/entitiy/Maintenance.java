@@ -31,15 +31,6 @@ public class Maintenance {
     }
  
     // Parameterized constructor
-    public Maintenance(Long id, Date scheduledDate, Date completedDate, String description, String status, Equipment equipment) {
-        this.id = id;
-        this.scheduledDate = scheduledDate;
-        this.completedDate = completedDate;
-        this.description = description;
-        this.status = status;
-        this.equipment = equipment;
-    }
- 
     // Getters and Setters
     public Long getId() {
         return id;

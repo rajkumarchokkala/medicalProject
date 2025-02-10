@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-<<<<<<< HEAD
 public class UserService implements UserDetailsService {
 
     @Autowired
@@ -45,31 +44,4 @@ public class UserService implements UserDetailsService {
                 new ArrayList<>()
         );
     }
-=======
-public class UserService 
-{
-@Autowired
-private UserRepository userRepository;
-
-@Autowired
-AuthenticationManager authenticationManager;
-
-
-public User registerUser(User user)
-{
-    return userRepository.save(user);
-}
-
-public LoginResponse loginUser(LoginRequest loginRequest)
-{     
-    authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(
-            loginRequest.getUsername(),loginRequest.getPassword()
-        )
-    );
-    return new LoginResponse("Login Successfull");
-}
-
-    
->>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
 }

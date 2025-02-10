@@ -1,11 +1,4 @@
 package com.wecp.medicalequipmentandtrackingsystem.jwt;
-<<<<<<< HEAD
- 
- 
-=======
-
-
->>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -17,19 +10,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-<<<<<<< HEAD
  
-=======
-
->>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
-<<<<<<< HEAD
  
+ @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
    
     private final UserDetailsService userDetailsService;
@@ -75,9 +64,4 @@ public class JwtRequestFilter extends OncePerRequestFilter {
  
         filterChain.doFilter(request, response);
     }
-=======
-
-public class JwtRequestFilter extends OncePerRequestFilter {
-    
->>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
 }

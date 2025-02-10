@@ -1,9 +1,5 @@
 package com.wecp.medicalequipmentandtrackingsystem.jwt;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
 import com.wecp.medicalequipmentandtrackingsystem.entitiy.User;
 import com.wecp.medicalequipmentandtrackingsystem.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -12,12 +8,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD
 @Component
 public class JwtUtil {
 
@@ -25,7 +19,7 @@ public class JwtUtil {
 
     @Autowired
     public JwtUtil(UserRepository userRepository) {
-       ;
+       
     }
 
     private final String secret = "secretKey000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
@@ -83,8 +77,4 @@ public class JwtUtil {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-=======
-public class JwtUtil {
-
->>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
 }

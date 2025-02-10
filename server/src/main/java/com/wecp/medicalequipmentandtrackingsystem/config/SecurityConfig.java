@@ -1,5 +1,4 @@
 package com.wecp.medicalequipmentandtrackingsystem.config;
-
 import com.wecp.medicalequipmentandtrackingsystem.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,10 +16,46 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-public class SecurityConfig {
-    
-<<<<<<< HEAD
-    
-=======
->>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final UserDetailsService userDetailsService;
+    private final JwtRequestFilter jwtRequestFilter;
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public SecurityConfig(UserDetailsService userDetailsService, JwtRequestFilter jwtRequestFilter, PasswordEncoder passwordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.jwtRequestFilter = jwtRequestFilter;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/api/user/register", "/api/user/login").permitAll()
+            .antMatchers("/api/hospital/create", "/api/hospital/equipment", "/api/hospital/maintenance/schedule", "/api/hospital/order").hasAuthority("HOSPITAL")
+            .antMatchers("/api/hospitals", "/api/hospital/equipment/{hospitalId}").hasAuthority("HOSPITAL")
+            .antMatchers("/api/technician/maintenance", "/api/supplier/orders").hasAuthority("TECHNICIAN")
+            .antMatchers("/api/technician/maintenance/update/{maintenanceId}").hasAuthority("TECHNICIAN")
+            .antMatchers("/api/supplier/order/update/{orderId}").hasAuthority("SUPPLIER")
+            .anyRequest().authenticated()
+            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+            http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 }

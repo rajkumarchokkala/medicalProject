@@ -17,18 +17,11 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "equipment_id")
     private Equipment equipment;
- 
    
-    public Order(Long id, Date orderDate, String status, int quantity, Equipment equipment) {
-        this.id = id;
-        this.orderDate = orderDate;
-        this.status = status;
-        this.quantity = quantity;
-        this.equipment = equipment;
+    public Order() 
+    {
+        
     }
- 
-   
-    public Order() {}
  
    
     public Long getId() {

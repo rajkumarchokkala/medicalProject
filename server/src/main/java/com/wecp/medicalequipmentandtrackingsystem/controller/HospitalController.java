@@ -48,17 +48,15 @@ public class HospitalController {
     }
 
     @PostMapping("/api/hospital/equipment")
-    public ResponseEntity<Equipment> addEquipment(@RequestParam Long hospitalId, @RequestBody Equipment equipment) 
-    {
-        // add equipment to the hospital and return the added equipment with status code 201 = CREATED;
-        return ResponseEntity.status(201).body(equipmentService.addEquipment(hospitalId,equipment));
+    public ResponseEntity<Equipment> addEquipment(@RequestParam Long hospitalId, @RequestBody Equipment equipment) {
+        Equipment addedEquipment = equipmentService.addEquipment(hospitalId, equipment);
+        return new ResponseEntity<>(addedEquipment, HttpStatus.CREATED);
     }
 
     @GetMapping("/api/hospital/equipment/{hospitalId}")
-    public ResponseEntity<List<Equipment>> getAllEquipmentsOfHospital(@PathVariable Long hospitalId) 
-    {
-        // return all equipments of hospital with response code = 200 OK
-        return ResponseEntity.status(200).body(equipmentService.getAllEquipmentsOfHospital(hospitalId));
+    public ResponseEntity<List<Equipment>> getAllEquipmentOfHospital(@PathVariable Long hospitalId) {
+        List<Equipment> equipmentList = equipmentService.getAllEquipmentOfHospital(hospitalId);
+        return new ResponseEntity<>(equipmentList, HttpStatus.OK);
     }
 
     @PostMapping("/api/hospital/maintenance/schedule")

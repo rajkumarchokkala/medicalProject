@@ -11,18 +11,47 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./createhospital.component.scss']
 })
 export class CreatehospitalComponent implements OnInit {
-<<<<<<< HEAD
   itemForm!:FormGroup;
   equipmentForm!:FormGroup;
-  formModel:any={status:null}
+  formModel:any={status:null};
+  showError:boolean=false;
+  errorMessage:any;
+  hospitalList:any=[];
+  assignModel:any={};
+  showMessage:any;
+  responseMessage:any;
+
+  constructor()
+  {
+
+  }
   
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
-=======
->>>>>>> 3a1eb4f5fa8a9cacda5b78088babe5fb69a1930e
  
   //todo: Complete missing code..
+
+  getHospital()
+  {
+    
+  }
+
+  onSubmit()
+  {
+
+  }
+
+  Addequipment(value:any){
+    
+  }
+
+  submitEquipment()
+  {
+
+  }
+
+
   
 }

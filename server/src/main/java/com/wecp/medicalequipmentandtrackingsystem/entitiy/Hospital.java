@@ -22,17 +22,10 @@ public class Hospital {
     
     public Hospital() {}
     
-    public Hospital(Long id, String name, String location) 
+    public Long getId() 
     {
-        this.id = id;
-        this.name = name;
-        this.location = location;
-        }
-
-
-    public Long getId() {
         return id;
-        }
+    }
         
     public void setId(Long id) {
         this.id = id;
@@ -42,13 +35,15 @@ public class Hospital {
         return name;
         }
         
-    public void setName(String name) {
+    public void setName(String name) 
+    {
         this.name = name;
-        }
+    }
         
-    public String getLocation() {
+    public String getLocation() 
+    {
         return location;
-        }
+    }
         
     public void setLocation(String location) {
         this.location = location;

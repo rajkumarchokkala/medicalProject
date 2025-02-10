@@ -20,19 +20,29 @@ public class EquipmentService
     @Autowired 
     private HospitalRepository hospitalRepository;
 
-    public Equipment addEquipment(Long hospitalId,Equipment equipment) 
-    {
-        Hospital hospital=hospitalRepository.findById(hospitalId).orElse(null);
-        if(hospital!=null)
-        {
-            equipment.setHospital(hospital);
-            return equipmentRepository.save(equipment);
-        }
-        return null;
+    // public Equipment addEquipment(Long hospitalId,Equipment equipment) 
+    // {
+    //     Hospital hospital=hospitalRepository.findById(hospitalId).orElse(null);
+    //     if(hospital!=null)
+    //     {
+    //         equipment.setHospital(hospital);
+    //         return equipmentRepository.save(equipment);
+    //     }
+    //     return null;
+    // }
+    public Equipment addEquipment(Long hospitalId, Equipment equipment) {
+        Hospital hospital = hospitalRepository.findById(hospitalId)
+                .orElseThrow(() -> new RuntimeException("Hospital not found"));
+        equipment.setHospital(hospital);
+        return equipmentRepository.save(equipment);
     }
 
-    public List<Equipment> getAllEquipmentsOfHospital(Long hospitalId)
-    {
+    // public List<Equipment> getAllEquipmentsOfHospital(Long hospitalId)
+    // {
+    //     return equipmentRepository.findByHospitalId(hospitalId);
+    // }
+    public List<Equipment> getAllEquipmentOfHospital(Long hospitalId) {
         return equipmentRepository.findByHospitalId(hospitalId);
     }
 }
+
