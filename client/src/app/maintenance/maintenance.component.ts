@@ -12,5 +12,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MaintenanceComponent implements OnInit {
   //todo: complete missing code...
+  itemForm!:FormGroup;
+  ngOnInit(): void {
+    
+  }
 }
 

@@ -10,7 +10,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './createhospital.component.html',
   styleUrls: ['./createhospital.component.scss']
 })
-export class CreatehospitalComponent implements OnInit {
+export class CreatehospitalComponent implements OnInit 
+{
   itemForm!:FormGroup;
   equipmentForm!:FormGroup;
   formModel:any={status:null};
@@ -21,18 +22,21 @@ export class CreatehospitalComponent implements OnInit {
   showMessage:any;
   responseMessage:any;
 
-  constructor()
+  constructor(private httpService:HttpService,private fb:FormBuilder)
   {
 
   }
   
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  ngOnInit(): void 
+  {
+    this.itemForm=this.fb.group(
+      {
+        name:['',[Validators.required]],
+        location:['',[Validators.required]]
+      }
+    )
   }
  
-  //todo: Complete missing code..
-
   getHospital()
   {
     
@@ -43,7 +47,8 @@ export class CreatehospitalComponent implements OnInit {
 
   }
 
-  Addequipment(value:any){
+  Addequipment(value:any)
+  {
     
   }
 
@@ -51,7 +56,5 @@ export class CreatehospitalComponent implements OnInit {
   {
 
   }
-
-
-  
+ 
 }

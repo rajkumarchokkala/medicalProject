@@ -9,29 +9,36 @@ export class AuthService {
   private isLoggedIn: boolean = false;
 
   constructor() {}
-
+//hai shivraj shukla
   // Method to save token received from login
   saveToken(token: string) {
-  //please complete this
+    this.token = token;
+    this.isLoggedIn = true;
+    // Optionally, you can save the token to local storage or a cookie for persistence
+    localStorage.setItem('token', token);
   }
    SetRole(role:any)
   {
-     //please complete this
+    localStorage.setItem('role',role);
   }
   get getRole ():string|null
   {
     return localStorage.getItem('role');
   }
   // Method to retrieve login status
-  get getLoginStatus(): boolean {
-  
-      //please complete this
-   
+  get getLoginStatus(): boolean 
+  {
+      return !!localStorage.getItem('token');
   }
+
   getToken(): string | null {
-  //please complete this
+   this.token= localStorage.getItem('token');
+    return this.token;
   }
   logout(){
-    //please complete this
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+     this.token=null;
+     this.isLoggedIn=false;
    }
 }

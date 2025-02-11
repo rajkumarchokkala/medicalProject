@@ -10,5 +10,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./requestequipment.component.scss']
 })
 export class RequestequipmentComponent 
-//todo: complete missing code..
+{
+  
+}
 

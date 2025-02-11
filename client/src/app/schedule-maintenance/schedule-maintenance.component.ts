@@ -11,5 +11,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./schedule-maintenance.component.scss']
 })
 export class ScheduleMaintenanceComponent 
-//todo: complete missing code
+{
+  itemForm!:FormGroup;
+}
 
