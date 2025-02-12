@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ScheduleMaintenanceComponent implements OnInit 
 {
+  // schedule code
   itemForm: FormGroup;
   formModel: any = { status: null };
   showError: boolean = false;
