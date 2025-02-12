@@ -40,7 +40,6 @@ export class ScheduleMaintenanceComponent implements OnInit
   ngOnInit(): void {
     this.getHospital();
     this.loadEquipmentsForHospital(this.equipmentId);
-    //this.onHospitalSelect(this.equipmentId);
   }
 
   dateValidator(control: AbstractControl):ValidationErrors|null
@@ -61,16 +60,6 @@ export class ScheduleMaintenanceComponent implements OnInit
     })
   }
 
-  // loadEquipmentsForHospital(hospitalId: any): void 
-  // {
-  //   this.httpService.getEquipmentById(hospitalId).subscribe({
-  //     next: (equipments) => 
-  //     {
-  //       this.selectedEquipments = equipments;
-  //     },
-  //     error: (error) => console.error(`Error loading equipments for hospital ${hospitalId}:`, error)
-  //   })
-  // }
 
   loadEquipmentsForHospital($event:any): void 
   {
@@ -85,16 +74,7 @@ export class ScheduleMaintenanceComponent implements OnInit
     });
   }
 
-  // onHospitalSelect(hospital: any): void 
-  // {
-  //   this.selectedHospitalId = hospital.id;
-  //   this.httpService.getEquipmentById(this.selectedHospitalId).subscribe({
-  //       next: (hospitals) => {
-  //           this.equipmentList = hospitals;
-  //       },
-  //       error: (error) => console.error(`Error loading hospitals for equipment ${hospital.id}:`, error)
-  //   })
-  // }
+  
 
   onSubmit(): void {
     if (this.itemForm.valid) {

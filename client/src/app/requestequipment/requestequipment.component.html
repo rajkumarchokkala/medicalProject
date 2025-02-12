@@ -1,1 +1,51 @@
-//todo: complete missing code..
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="container mt-4">
+    <div class="form-group">
+      <label for="hospital">Hospital</label>
+      <select id="hospital" formControlName="hospital" class="form-control" (change)="onHospitalSelect($event)">
+        <option value="">Please Choose</option>
+        <option *ngFor="let hospital of hospitalList"  [value]="hospital.id">{{ hospital.name }}</option>
+      </select>
+      <div *ngIf="itemForm.get('hospital')?.invalid && itemForm.get('hospital')?.touched" class="text-danger">
+        Hospital is required.
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="equipment">Equipment</label>
+      <select id="equipment" formControlName="equipment" class="form-control">
+        <option value="">Please Choose</option>
+        <option *ngFor="let equipment of equipmentList" [value]="equipment.id">{{ equipment.name }}</option>
+      </select>
+      <div *ngIf="itemForm.get('equipment')?.invalid && itemForm.get('equipment')?.touched" class="text-danger">
+        Equipment is required.
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" formControlName="quantity" class="form-control">
+      <div *ngIf="itemForm.get('quantity')?.invalid && itemForm.get('quantity')?.touched" class="text-danger">
+        Quantity must be at least 1.
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" formControlName="status" class="form-control">
+        <option *ngFor="let status of statusFelids" [value]="status">{{ status }}</option>
+      </select>
+      <div *ngIf="itemForm.get('status')?.invalid && itemForm.get('status')?.touched" class="text-danger">
+        Status is required.
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="orderDate">Order Date (DD-MM-YYYY)</label>
+      <input type="text" id="orderDate" formControlName="orderDate" class="form-control">
+      <div *ngIf="itemForm.get('orderDate')?.invalid && itemForm.get('orderDate')?.touched" class="text-danger">
+        <div *ngIf="itemForm.get('orderDate')?.hasError('inval')">Invalid date format.</div>
+      </div>
+    </div>
+  
+    <button type="submit" class="btn btn-primary" [disabled]="itemForm.invalid">Submit</button>
+  </form>
