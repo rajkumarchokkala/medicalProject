@@ -19,9 +19,10 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'dashboard', component: DashbaordComponent },
   { path: 'createhospital', component: CreatehospitalComponent },  
-  { path: 'schedule-maintenance', component: ScheduleMaintenanceComponent },  
+  { path: 'schedulemaintenance', component: ScheduleMaintenanceComponent },  
   { path: 'requestequipment', component: RequestequipmentComponent },  
-  { path: 'maintenance', component: MaintenanceComponent },  
+  { path: 'maintenance', component: MaintenanceComponent }, 
+  {path: 'maintenance/:id', component: MaintenanceComponent }, 
   { path: 'orders', component: OrdersComponent },  
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 

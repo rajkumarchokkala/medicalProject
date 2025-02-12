@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../environments/environment.development';
 import { AuthService } from './auth.service';
 
@@ -36,6 +36,17 @@ export class HttpService {
     );
   }
   
+  getMaintananceById(maintenanceId:any):Observable<any>{
+    return this.http.get(this.serverName + "/api/hospital/maintenance" + maintenanceId).pipe(map((data) => {
+      if (Array.isArray(data)) {
+        return data;
+      }
+      else {
+        return [data];
+      }
+    }));
+     
+  }
 
   getorders():Observable<any> {
    
