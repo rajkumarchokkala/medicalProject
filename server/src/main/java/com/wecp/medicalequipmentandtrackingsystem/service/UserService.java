@@ -1,6 +1,7 @@
 package com.wecp.medicalequipmentandtrackingsystem.service;
 
 
+import com.wecp.medicalequipmentandtrackingsystem.Exceptions.UserAlreadyExists;
 import com.wecp.medicalequipmentandtrackingsystem.entitiy.User;
 import com.wecp.medicalequipmentandtrackingsystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class UserService implements UserDetailsService {
 
 
     public User registerUser(User user) {
+        User newUser = userRepository.findByUsername(user.getUsername());
+        if(newUser!=null)
+        {
+            throw new UserAlreadyExists(404, "User Already Exists");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }

@@ -1,3 +1,5 @@
+
+       
 <div>
     <div class="row justify-content-center mt-5">
       <div class="col-md-10">
@@ -14,7 +16,7 @@
                   <th>Completed Date</th>
                   <th>Description</th>
                   <th>Status</th>
-                  <th>Action</th>
+                  <th colspan="2">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -24,7 +26,8 @@
                   <td>{{ maintenance.completedDate | date:'dd-MMM-YYYY' }}</td>
                   <td>{{ maintenance.description }}</td>
                   <td>{{ maintenance.status }}</td>
-                  <td><button (click)="onClick(maintenance.id)">Edit</button></td>
+                  <td><button (click)="update(maintenance)" style="background-color: rgb(38, 38, 121); color: white;">Edit</button></td>
+                  <td><button (click)="deleteMaintenance(maintenance.id)" style="background-color: rgb(38, 38, 121); color: white;">Delete</button></td>
                 </tr>
               </tbody>
             </table>
@@ -43,18 +46,18 @@
                 <button class="btn-close" (click)="closeedit()">❌</button>
             </div>
             <div class="custom-modal-body">
-                <form [formGroup]="itemForm"  (ngSubmit)="updateMaintenance()" >
+                <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
                   <div class="form-group">
                     <div>
                         <label for="scheduledDate">Scheduled Date:</label>
-                        <input type="text" id="scheduledDate" formControlName="scheduledDate" />
+                        <input type="date" id="scheduledDate" formControlName="scheduledDate" />
                         <div *ngIf="itemForm.get('scheduledDate')?.invalid && itemForm.get('scheduledDate')?.touched">
                         <small class="error">Scheduled date is required.</small>
                         </div>
                         </div>                    
                           <div>
                         <label for="completedDate">End Date:</label>
-                        <input type="text" id="completedDate" formControlName="completedDate"/>
+                        <input type="date" id="completedDate" formControlName="completedDate"/>
                         <div *ngIf="itemForm.get('completedDate')?.invalid && itemForm.get('completedDate')?.touched">
                         <small class="error">End date is required.</small>
                         </div>
@@ -83,7 +86,6 @@
                     </div>
                     </div>
                 </form>
-            </div>
-           
+            </div>  
       </div>
     </div>

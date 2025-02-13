@@ -20,15 +20,14 @@ import { ScheduleMaintenanceComponent } from './schedule-maintenance/schedule-ma
 import { RequestequipmentComponent } from './requestequipment/requestequipment.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { OrdersComponent } from './orders/orders.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
       RegistrationComponent,
       DashbaordComponent,
-  
-    
       CreatehospitalComponent,
       ScheduleMaintenanceComponent,
       RequestequipmentComponent,
@@ -40,7 +39,10 @@ import { OrdersComponent } from './orders/orders.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule 
+    HttpClientModule ,
+    MatSnackBarModule,
+    BrowserAnimationsModule
+  
   ],
   providers: [HttpService,HttpClientModule ],
   bootstrap: [AppComponent]

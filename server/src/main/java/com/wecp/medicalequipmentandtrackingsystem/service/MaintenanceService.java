@@ -46,4 +46,9 @@ public class MaintenanceService
         }
         return null;
     }  
+
+    public void deleteMaintenance(Long maintenanceId)
+    {
+        this.maintenanceRepository.deleteById(maintenanceId);
+    }
 }

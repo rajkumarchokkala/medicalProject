@@ -10,7 +10,7 @@
   <table>
     <thead>
       <tr>
-        <th>Sr#</th>
+        <th>Order ID</th>
         <th>Order Date</th>
         <th>Status</th>
         <th>Equipment</th>
@@ -34,7 +34,7 @@
           description:{{ order.hospital.description }}
         </td> -->
         <td>
-          <button (click)="update(order.id)">Update</button>
+          <button style="background-color: rgb(49, 49, 146); color: white;" (click)="update(order.id)">Update</button>
         </td>
       </tr>
     </tbody>

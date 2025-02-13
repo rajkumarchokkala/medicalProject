@@ -31,4 +31,11 @@ public class TechnicianController {
         return ResponseEntity.status(200).body(maintenanceService.updateMaintenance(maintenanceId,updatedMaintenance));
     }
 
+    @DeleteMapping("/api/technician/maintenance/{maintenanceId}")
+    public ResponseEntity<Void> deleteMaintenance(@PathVariable Long maintenanceId)
+    {
+        maintenanceService.deleteMaintenance(maintenanceId);
+        return ResponseEntity.status(200).build();
+    }
+
 }

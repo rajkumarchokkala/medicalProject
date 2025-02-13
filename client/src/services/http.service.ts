@@ -118,12 +118,21 @@ export class HttpService {
     
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
-    return this.http.post(this.serverName+'/api/user/login',details,{headers:headers});
+    return this.http.post(this.serverName+'/api/user/login',details,{headers:headers})
   }
   registerUser(details:any):Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     return this.http.post(this.serverName+'/api/user/register',details,{headers:headers});
   } 
+
+  deleteMaintenance(maintenanceId:any):Observable<any>
+  {
+    const authToken = this.authService.getToken();
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', `Bearer ${authToken}`)
+    return this.http.delete(this.serverName+`/api/technician/maintenance/`+maintenanceId,{headers:headers});
+  }
 }
 

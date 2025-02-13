@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -12,12 +13,12 @@ import { HttpService } from '../../services/http.service';
 export class RegistrationComponent 
 {
   itemForm!:FormGroup;
-
+  durationInSeconds = 2;
   roles: string[] = ['HOSPITAL', 'TECHNICIAN', 'SUPPLIER'];
 
-  constructor(private fb: FormBuilder,private hs:HttpService,private router:Router) {
+  constructor(private fb: FormBuilder,private hs:HttpService,private router:Router,private snackBar: MatSnackBar) {
     this.itemForm = this.fb.group({
-      username: ['', Validators.required],
+      username: ['', [Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]],
       password: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
       email: ['', [Validators.required, Validators.email]],
       role: ['', Validators.required]
@@ -25,21 +26,42 @@ export class RegistrationComponent
   }
 
   onSubmit() {
-    console.log("in on submit..");
-   if(this.itemForm.valid)
-   {
-
-    this.hs.registerUser(this.itemForm.value).subscribe((data)=>
-    {
-   this.router.navigateByUrl('login')
-      console.log(data);
-    });
-
-
-   }
+    console.log("in on submit...");
+  
+    if (this.itemForm.valid) {
+      this.hs.registerUser(this.itemForm.value).subscribe(
+        (data) => {
+          console.log("Registration successful", data);
+          this.router.navigateByUrl('login');
+          this.snackBar.open('Register Successfully! Please Login', '', {
+            duration: this.durationInSeconds * 1000,
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar']
+          });
+        },
+        (error) => {
+          console.error("Registration failed", error);
+          this.snackBar.open('⚠️User Already Exists', '', {
+            duration: this.durationInSeconds * 1000,
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar'],
+            
+            // panelClass: ['snackbar']
+          });
+          // alert("User Already Exists");
+        }
+      );
+    } else {
+      // alert("Please fill the form correctly before submitting.");
+      this.snackBar.open('Please fill the form correctly before submitting.', '', {
+        duration: this.durationInSeconds * 1000,
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar']
+        
+      });
+    }
+  }
 }
 
 
-
-}
 
