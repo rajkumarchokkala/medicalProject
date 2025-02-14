@@ -19,7 +19,7 @@ export class RegistrationComponent
   constructor(private fb: FormBuilder,private hs:HttpService,private router:Router,private snackBar: MatSnackBar) {
     this.itemForm = this.fb.group({
       username: ['', [Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]],
-      password: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
+      password: ['', [Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$')]],
       email: ['', [Validators.required, Validators.email]],
       role: ['', Validators.required]
     });
@@ -46,13 +46,13 @@ export class RegistrationComponent
             verticalPosition: 'top',
             panelClass: ['custom-snackbar'],
             
-            // panelClass: ['snackbar']
+           
           });
-          // alert("User Already Exists");
+          
         }
       );
     } else {
-      // alert("Please fill the form correctly before submitting.");
+     
       this.snackBar.open('Please fill the form correctly before submitting.', '', {
         duration: this.durationInSeconds * 1000,
         verticalPosition: 'top',

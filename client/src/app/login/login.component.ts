@@ -32,7 +32,15 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("role", response.role);
             localStorage.setItem("username", response.username);
             console.log(localStorage.getItem("role"));
-            this.router.navigateByUrl('dashboard');
+             this.router.navigateByUrl('dashboard');
+
+
+
+          
+
+
+
+
             this.snackBar.open('Login Successful!', '', {
               duration: 2000,
               verticalPosition: 'top',

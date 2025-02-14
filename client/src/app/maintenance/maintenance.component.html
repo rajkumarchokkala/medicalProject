@@ -1,37 +1,131 @@
-
+<!-- 
        
 <div>
-    <div class="row justify-content-center mt-5">
-      <div class="col-md-10">
-        <div class="card">
-          <div class="card-header">
-            <h3>Maintenance List</h3>
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h3>Maintenance List</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Scheduled Date</th>
+                <th>Completed Date</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th colspan="2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let maintenance of maintenanceList">
+                <td>{{ maintenance.id }}</td>
+                <td>{{ maintenance.scheduledDate | date:'dd-MMM-YYYY' }}</td>
+                <td>{{ maintenance.completedDate | date:'dd-MMM-YYYY' }}</td>
+                <td>{{ maintenance.description }}</td>
+                <td>{{ maintenance.status }}</td>
+                <td><button (click)="update(maintenance)" style="background-color: rgb(38, 38, 121); color: white;">Edit</button></td>
+                <td><button (click)="deleteMaintenance(maintenance.id)" style="background-color: rgb(38, 38, 121); color: white;">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="formModel" class="custom-modal-overlay">
+  <h2 class="mt-5">Add Equipment</h2>
+      <div class="custom-modal">
+          <div class="custom-modal-header">
+              <h5 class="modal-title">Update Maintenance</h5>
+              <button class="btn-close" (click)="closeedit()">❌</button>
           </div>
-          <div class="card-body">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Scheduled Date</th>
-                  <th>Completed Date</th>
-                  <th>Description</th>
-                  <th>Status</th>
-                  <th colspan="2">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let maintenance of maintenanceList">
-                  <td>{{ maintenance.id }}</td>
-                  <td>{{ maintenance.scheduledDate | date:'dd-MMM-YYYY' }}</td>
-                  <td>{{ maintenance.completedDate | date:'dd-MMM-YYYY' }}</td>
-                  <td>{{ maintenance.description }}</td>
-                  <td>{{ maintenance.status }}</td>
-                  <td><button (click)="update(maintenance)" style="background-color: rgb(38, 38, 121); color: white;">Edit</button></td>
-                  <td><button (click)="deleteMaintenance(maintenance.id)" style="background-color: rgb(38, 38, 121); color: white;">Delete</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <div class="custom-modal-body">
+              <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <div>
+                      <label for="scheduledDate">Scheduled Date:</label>
+                      <input type="date" id="scheduledDate" formControlName="scheduledDate" />
+                      <div *ngIf="itemForm.get('scheduledDate')?.invalid && itemForm.get('scheduledDate')?.touched">
+                      <small class="error">Scheduled date is required.</small>
+                      </div>
+                      </div>                    
+                        <div>
+                      <label for="completedDate">End Date:</label>
+                      <input type="date" id="completedDate" formControlName="completedDate"/>
+                      <div *ngIf="itemForm.get('completedDate')?.invalid && itemForm.get('completedDate')?.touched">
+                      <small class="error">End date is required.</small>
+                      </div>
+                      </div>
+                       
+                        <div *ngIf="itemForm.get('completedDate')?.errors?.['dateRangeInvalid']">
+                      <small class="error">End date must be after the scheduled date.</small>
+                      </div>
+               
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea id="description" class="form-control" formControlName="description"></textarea>
+                  <div *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched" class="text-danger">
+                    Description is required.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status</label>
+                  <select name="status" id="status" formControlName="status">
+                      <option value="">Please Choose</option>
+                      <option *ngFor="let i of newStatus" [value]="i">{{i}}</option>
+                  </select>
+                </div>
+                  <div class="custom-modal-footer">
+                      <button class="btn btn-success" type="submit" >Submit</button>
+                  </div>
+                  </div>
+              </form>
+          </div>  
+    </div>
+  </div> -->
+
+
+
+
+  <!-- <div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h3>Maintenance List</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Scheduled Date</th>
+                <th>Completed Date</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th colspan="2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let maintenance of maintenanceList">
+                <td>{{ maintenance.id }}</td>
+                <td>{{ maintenance.scheduledDate | date:'dd-MMM-YYYY' }}</td>
+                <td>{{ maintenance.completedDate | date:'dd-MMM-YYYY' }}</td>
+                <td>{{ maintenance.description }}</td>
+                <td>{{ maintenance.status }}</td>
+                <td><button (click)="update(maintenance)"
+                    style="background-color: rgb(38, 38, 121); color: white;">Edit</button></td>
+                <td><button (click)="deleteMaintenance(maintenance.id)"
+                    style="background-color: rgb(38, 38, 121); color: white;">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -40,52 +134,231 @@
  
   <div *ngIf="formModel" class="custom-modal-overlay">
     <h2 class="mt-5">Add Equipment</h2>
-        <div class="custom-modal">
-            <div class="custom-modal-header">
-                <h5 class="modal-title">Update Maintenance</h5>
-                <button class="btn-close" (click)="closeedit()">❌</button>
+    <div class="custom-modal">
+      <div class="custom-modal-header">
+        <h5 class="modal-title">Update Maintenance</h5>
+        <button class="btn-close" (click)="closeedit()">❌</button>
+      </div>
+      <div class="custom-modal-body">
+        <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <div>
+              <label for="scheduledDate">Scheduled Date:</label>
+              <input type="text" id="scheduledDate" formControlName="scheduledDate" />
+              <div *ngIf="itemForm.get('scheduledDate')?.invalid && itemForm.get('scheduledDate')?.touched">
+                <small class="error">Scheduled date is required.</small>
+              </div>
             </div>
-            <div class="custom-modal-body">
-                <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-                  <div class="form-group">
-                    <div>
-                        <label for="scheduledDate">Scheduled Date:</label>
-                        <input type="date" id="scheduledDate" formControlName="scheduledDate" />
-                        <div *ngIf="itemForm.get('scheduledDate')?.invalid && itemForm.get('scheduledDate')?.touched">
-                        <small class="error">Scheduled date is required.</small>
-                        </div>
-                        </div>                    
-                          <div>
-                        <label for="completedDate">End Date:</label>
-                        <input type="date" id="completedDate" formControlName="completedDate"/>
-                        <div *ngIf="itemForm.get('completedDate')?.invalid && itemForm.get('completedDate')?.touched">
-                        <small class="error">End date is required.</small>
-                        </div>
-                        </div>
-                         
-                          <div *ngIf="itemForm.get('completedDate')?.errors?.['dateRangeInvalid']">
-                        <small class="error">End date must be after the scheduled date.</small>
-                        </div>
-                 
-                  <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" class="form-control" formControlName="description"></textarea>
-                    <div *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched" class="text-danger">
-                      Description is required.
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="status">Status</label>
-                    <select name="status" id="status" formControlName="status">
-                        <option value="">Please Choose</option>
-                        <option *ngFor="let i of newStatus" [value]="i">{{i}}</option>
-                    </select>
-                  </div>
-                    <div class="custom-modal-footer">
-                        <button class="btn btn-success" type="submit" >Submit</button>
-                    </div>
-                    </div>
-                </form>
-            </div>  
+            <div>
+              <label for="completedDate">End Date:</label>
+              <input type="text" id="completedDate" formControlName="completedDate" />
+              <div *ngIf="itemForm.get('completedDate')?.invalid && itemForm.get('completedDate')?.touched">
+                <small class="error">End date is required.</small>
+              </div>
+            </div>
+ 
+            <div *ngIf="itemForm.get('completedDate')?.errors?.['dateRangeInvalid']">
+              <small class="error">End date must be after the scheduled date.</small>
+            </div>
+ 
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea id="description" class="form-control" formControlName="description"></textarea>
+              <div *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"
+                class="text-danger">
+                Description is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select name="status" id="status" formControlName="status">
+                <option value="">Please Choose</option>
+                <option *ngFor="let i of newStatus" [value]="i">{{i}}</option>
+              </select>
+            </div>
+            <div class="custom-modal-footer">
+              <button class="btn btn-success" type="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+        <div *ngIf="showMessage" class="alert alert-success mt-3">
+          {{ successMessage }}
+        </div>
+ 
+        <div *ngIf="showError" class="alert alert-danger mt-3">
+          {{ errorMessage }}
+        </div>
       </div>
     </div>
+  </div>
+ 
+ 
+  <div *ngIf="showDelete" class="custom-modal-overlay">
+    <div class="custom-modal">
+      <div class="custom-modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+      </div>
+        <button class="btn-close" (click)="closeDelete()">❌</button>
+      </div>
+      <div class="custom-modal-body">
+        Are you sure you want to delete ?
+      </div>
+      <div class="custom-modal-footer">
+        <button (click)="deleteFinal()">Cancel</button>
+        <button (click)="closeDelete()">Delete</button>
+      </div>
+ 
+    </div>
+</div> -->
+ 
+ 
+<div class="row justify-content-center mt-5">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header">
+        <h3>Maintenance List</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Scheduled Date</th>
+              <th>Completed Date</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th colspan="2">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let maintenance of maintenanceList">
+              <td>{{ maintenance.id }}</td>
+              <td>{{ maintenance.scheduledDate}}</td>
+              <td>{{ maintenance.completedDate}}</td>
+              <td>{{ maintenance.description }}</td>
+              <td>{{ maintenance.status }}</td>
+              <td>
+                <button (click)="update(maintenance)" style="background-color: rgb(38, 38, 121); color: white;">Edit</button>
+              </td>
+              <td>
+                <button (click)="deleteMaintenance(maintenance.id)" style="background-color: rgb(38, 38, 121); color: white;">Cancel</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div *ngIf="formModel" class="custom-modal-overlay">
+  <h2 class="mt-5">Add Equipment</h2>
+  <div class="custom-modal">
+    <div class="custom-modal-header">
+      <h5 class="modal-title">Update Maintenance</h5>
+      <button class="btn-close" (click)="closeedit()">❌</button>
+    </div>
+    <div class="custom-modal-body">
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="scheduledDate">Scheduled Date</label>
+          <input type="text" id="scheduledDate" formControlName="scheduledDate"/>
+          <div
+            *ngIf="
+            itemForm.get('scheduledDate')?.hasError('required') &&
+            itemForm.get('scheduledDate')?.touched
+            "
+            class="error"
+          >
+          Policy StartDate is required.
+          </div>
+          <div
+            *ngIf="
+            itemForm.controls['scheduledDate'].invalid &&
+              (itemForm.controls['scheduledDate'].dirty ||
+              itemForm.controls['scheduledDate'].touched)
+            "
+            class="error"
+          >
+          Policy StartDate must be in DD-MM-YYYY.
+          </div>
+        </div>
+   
+        <div class="form-group">
+          <label for="completedDate">Completed Date</label>
+          <input type="text" id="completedDate" formControlName="completedDate" />
+          <div
+            *ngIf="
+            itemForm.get('completedDate')?.hasError('required') &&
+            itemForm.get('completedDate')?.touched
+            "
+            class="error"
+          >
+          Policy EndDate is required.
+          </div>
+          <div
+            *ngIf="
+              itemForm.controls['completedDate'].invalid &&
+                (itemForm.controls['completedDate'].dirty ||
+                itemForm.controls['completedDate'].touched)
+              "
+              class="error"
+            >
+            Policy EndDate must be in YYYY-MM-DD format.
+            </div>
+          <div
+            *ngIf="
+              itemForm.errors?.['dateRangeInvalid'] && itemForm.get('completedDate')?.touched && itemForm.get('completedDate')?.touched
+            "
+            class="error"
+           >
+            End date must be greater than or equal to start date
+          </div>
+        </div>
+        
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" class="form-control" formControlName="description"></textarea>
+            <div *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched" class="text-danger">
+              Description is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" id="status" formControlName="status">
+              <option value="" disabled >Please Choose Status</option>
+              <option *ngFor="let i of newStatus" [value]="i">{{i}}</option>
+            </select>
+            <div *ngIf="itemForm.get('status')?.touched && itemForm.get('status')?.invalid" class="invalid-feedback d-block">
+              Status is required.
+            </div>
+          </div>
+          <div class="custom-modal-footer">
+            <button class="btn btn-success" type="submit">Submit</button>
+          </div>
+      </form>
+      <div *ngIf="showMessage" class="alert alert-success mt-3">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="showError" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div *ngIf="showDelete" class="custom-modal-overlay">
+  <div class="custom-modal">
+    <div class="custom-modal-header">
+      <h5 class="modal-title">Confirm Delete</h5>
+      <button class="btn-close" (click)="closeDelete()">❌</button>
+    </div>
+    <div class="custom-modal-body">
+      Are you sure you want to cancel the schedule?
+    </div>
+    <div class="custom-modal-footer">
+      <button (click)="closeDelete()">Cancel</button>
+      <button (click)="deleteFinal()">Confirm</button>
+    </div>
+  </div>
+</div>

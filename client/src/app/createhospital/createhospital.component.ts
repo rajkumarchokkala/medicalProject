@@ -1,36 +1,146 @@
+// import { Component, OnInit } from '@angular/core';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { Router } from '@angular/router';
+// import { HttpService } from '../../services/http.service';
+// import { AuthService } from '../../services/auth.service';
+
+
+// @Component({
+//   selector: 'app-createhospital',
+//   templateUrl: './createhospital.component.html',
+//   styleUrls: ['./createhospital.component.scss']
+// })
+// export class CreatehospitalComponent implements OnInit 
+// {
+//   itemForm!:FormGroup;
+//   equipmentForm!:FormGroup;
+//   // formModel:any={status:null};
+//   showError:boolean=false;
+//   errorMessage:any;
+//   hospitalList:any=[];
+//   assignModel:any={};
+//   showMessage:any;
+//   responseMessage:any;
+//   formModal : boolean = false;
+//   id:any;
+  
+
+//   constructor(private httpService:HttpService,private fb:FormBuilder)
+//   {
+
+//   }
+  
+//   ngOnInit(): void 
+//   {
+//     this.itemForm=this.fb.group(
+//       {
+//         name:['',[Validators.required]],
+//         location:['',[Validators.required]]
+//       }
+//     );
+//     this.equipmentForm=this.fb.group({
+//       name:['',Validators.required],
+//       description:['',Validators.required]
+//     });
+//     this.hospitalList=this.getHospital();
+   
+//   }
+ 
+//   getHospital()
+//   {
+//     this.httpService.getHospital().subscribe((data)=>
+//     {
+//       this.hospitalList=data;
+//     });
+//   }
+
+//   onSubmit()
+//   {
+//     if(this.itemForm.valid){
+//       this.httpService.createHospital(this.itemForm.value).subscribe(
+//         {
+//           next:(data)=>
+//           {
+//             alert('Hospital added successfully');
+//             console.log(data);
+//             this.getHospital();
+//             this.itemForm.reset();
+//           },
+//           error:(error)=>
+//           {
+//             const errorMessage="Cannot create hospital";
+//             console.error(errorMessage);
+//           }
+//         }
+//       )
+
+      
+//     }
+//   }
+
+//   Addequipment(value:any)
+//   {
+//     this.formModal = true;
+//     this.id=value;
+//   }
+
+//   submitEquipment()
+//   {
+//     if(this.equipmentForm.valid){
+//       this.httpService.addEquipment(this.equipmentForm.value,this.id).subscribe(()=>{
+//         this.equipmentForm.reset();
+//         this.showMessage="Equipment Added Sucessfully";
+//         alert("Equipment Added Sucessfully");
+//       })
+//     }
+//   }
+
+//   closeshowRejectModal(){
+//     this.formModal = false;
+//   }
+
+//   deleteEquipment(){
+
+//   }
+ 
+// }
+
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { AuthService } from '../../services/auth.service';
-
-
+ 
+ 
 @Component({
   selector: 'app-createhospital',
   templateUrl: './createhospital.component.html',
   styleUrls: ['./createhospital.component.scss']
 })
-export class CreatehospitalComponent implements OnInit 
+export class CreatehospitalComponent implements OnInit
 {
   itemForm!:FormGroup;
   equipmentForm!:FormGroup;
-  // formModel:any={status:null};
+  showMessage:boolean=false;
+  successMessage:any;
+  showMessageEquipment:boolean=false;
   showError:boolean=false;
   errorMessage:any;
+  showErrorEquipment:boolean=false;
   hospitalList:any=[];
   assignModel:any={};
-  showMessage:any;
   responseMessage:any;
-  formModal : boolean = false;
+  formModel : boolean = false;
   id:any;
-  
-
+ 
+ 
   constructor(private httpService:HttpService,private fb:FormBuilder)
   {
-
+ 
   }
-  
-  ngOnInit(): void 
+ 
+  ngOnInit(): void
   {
     this.itemForm=this.fb.group(
       {
@@ -42,8 +152,7 @@ export class CreatehospitalComponent implements OnInit
       name:['',Validators.required],
       description:['',Validators.required]
     });
-    this.hospitalList=this.getHospital();
-   
+    this.getHospital();
   }
  
   getHospital()
@@ -53,52 +162,83 @@ export class CreatehospitalComponent implements OnInit
       this.hospitalList=data;
     });
   }
-
+ 
   onSubmit()
   {
     if(this.itemForm.valid){
       this.httpService.createHospital(this.itemForm.value).subscribe(
         {
-          next:(data)=>
+          next:()=>
           {
-            alert('Hospital added successfully');
-            console.log(data);
+            this.showMessage=true;
+            this.successMessage='Hospital added successfully!'
+            this.itemForm.reset();
+            this.getHospital();
+            setTimeout(()=>
+            {
+              this.showMessage=false;
+            },2000);
           },
-          error:(error)=>
+          error:()=>
           {
-            const errorMessage="Cannot create hospital";
-            console.error(errorMessage);
+            this.showError=true;
+            this.errorMessage="Cannot create hospital";
           }
         }
       )
-
-      
     }
   }
-
+ 
   Addequipment(value:any)
   {
-    this.formModal = true;
+    this.formModel = true;
     this.id=value;
   }
-
+ 
+  // deleteHospital(id:any)
+  // {
+  //   console.log("deleted");
+  //   this.httpService.deleteHospital(id).subscribe(()=>this.getHospital());
+  //   console.log('after deletion');
+  // }
+ 
+  // deleteEquipment(id:any)
+  // {
+  //   console.log("deleted");
+   
+  //   this.httpService.deleteEquipment(id).subscribe(()=>this.getHospital());
+  //   console.log('after deletion');
+  // }
+ 
   submitEquipment()
   {
-    if(this.equipmentForm.valid){
-      this.httpService.addEquipment(this.equipmentForm.value,this.id).subscribe(()=>{
-        this.equipmentForm.reset();
-        this.showMessage="Equipment Added Sucessfully";
-        alert("Equipment Added Sucessfully");
+    if(this.equipmentForm.valid)
+    {
+      this.httpService.addEquipment(this.equipmentForm.value,this.id).subscribe(
+      {
+        next:()=>
+        {
+          this.showMessageEquipment=true;
+          this.successMessage="Equipment Added Sucessfully";
+          this.equipmentForm.reset();
+          setTimeout(()=>
+          {
+            this.showMessageEquipment=false;
+            this.formModel=false;
+          },2000);
+        },
+        error:()=>
+        {
+          this.showErrorEquipment=true;
+          this.errorMessage='Cannot add equipment!';
+        }
       })
     }
   }
-
-  closeshowRejectModal(){
-    this.formModal = false;
-  }
-
-  deleteEquipment(){
-
-  }
  
+  closeshowRejectModal()
+  {
+    this.formModel = false;
+  }
 }
+ 

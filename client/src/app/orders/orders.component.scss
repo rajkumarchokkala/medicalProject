@@ -284,3 +284,13 @@ select, .form-control {
     padding: 6px 10px;
   }
 }
+
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.disabled:hover {
+  cursor: not-allowed;
+}

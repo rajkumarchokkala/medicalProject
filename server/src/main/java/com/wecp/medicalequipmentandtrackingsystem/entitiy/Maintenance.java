@@ -2,7 +2,7 @@ package com.wecp.medicalequipmentandtrackingsystem.entitiy;
 
 
 import javax.persistence.*;
-import java.util.Date;
+// import java.util.Date;
 
 @Entity
 @Table(name = "maintenances") // do not change table name
@@ -12,10 +12,10 @@ public class Maintenance {
     private Long id;
  
     // @Temporal(TemporalType.DATE)
-    private Date scheduledDate;
+    private String scheduledDate;
  
     // @Temporal(TemporalType.DATE)
-    private Date completedDate;
+    private String completedDate;
  
     private String description;
     private String status;
@@ -40,20 +40,20 @@ public class Maintenance {
         this.id = id;
     }
  
-    public Date getScheduledDate() {
+    public String getScheduledDate() {
         return scheduledDate;
     }
  
-    public void setScheduledDate(Date scheduledDate) {
+    public void setScheduledDate(String scheduledDate) {
         this.scheduledDate = scheduledDate;
     }
  
  
-    public Date getCompletedDate() {
+    public String getCompletedDate() {
         return completedDate;
     }
  
-    public void setCompletedDate(Date completedDate) {
+    public void setCompletedDate(String completedDate) {
         this.completedDate = completedDate;
     }
  

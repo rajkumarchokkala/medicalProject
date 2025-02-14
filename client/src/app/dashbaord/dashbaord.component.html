@@ -30,6 +30,89 @@
     </div>
   </section>
   
+
+
+  <section *ngIf="role === 'HOSPITAL'" class="stats-box">
+    <div class="stats-content">
+        <h2>Registered Hospitals</h2>
+        <p style="text-align: center; font-family: 'Times New Roman', Times, serif;font-weight: 900;font-size: 24px;">{{hospitalCount}}</p>
+        <div class="hospital-list">
+            <div class="hospital-box" *ngFor="let i of hospitals">
+                <div class="hospital-name">
+                  <i class="bi bi-hospital"></i>{{i.name}}
+                </div>
+                <div class="hospital-location">
+                    <i class="bi bi-geo-alt-fill"></i> {{i.location}}
+                </div>
+                <!-- <div></div> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section *ngIf="role === 'SUPPLIER'" class="stats-box">
+  <div class="stats-content">
+    <h2> Orders</h2>
+    <p style="text-align: center;font-family: 'Times New Roman', Times, serif; font-weight: 900; font-size: 24px;">{{orderCount}}</p>
+    <div class="order-grid">
+      <div *ngFor="let a of orderList" class="order-box">
+         <div *ngIf="a.status ==='Initiated'">
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="color: white; text-align: center;">Order ID</td>
+              <td style="color: white; text-align: center;">Equipment</td>
+              <td style="color: white; text-align: center;">Status</td>
+            </tr>
+            <tr>
+              <td style="color: white; text-align: center;">{{a.id}}</td>
+              <td style="color: white; text-align: center;">{{a.equipment.name}}</td>
+              <td style="color: white; text-align: center;">{{a.status}}</td>
+            </tr>
+          </table>
+      </div>
+     
+    </div>
+    </div> 
+    </div>
+ </section>
+
+
+
+<section *ngIf="role === 'TECHNICIAN'" class="stats-box">
+  <div class="stats-content">
+    <h2> Maintenance</h2>
+    <p style="text-align: center; font-family: 'Times New Roman', Times, serif; font-weight: 900; font-size: 24px;">{{maintenanceListCount}}</p>
+    <div class="maintenance-grid">
+      <div *ngFor="let m of maintenanceList" class="maintenance-box">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="color: white; text-align: center;">SCHEDULED DATE</td>
+            <td style="color: white; text-align: center;">COMPLETED DATE</td>
+            <td style="color: white; text-align: center;">DESCRIPTION</td>
+            <td style="color: white; text-align: center;">STATUS</td>
+          </tr>
+          <tr>
+            <td style="color: white; text-align: center;">{{m.scheduledDate}}</td>
+            <td style="color: white; text-align: center;">{{m.completedDate}}</td>
+            <td style="color: white; text-align: center;">{{m.description}}</td>
+            <td style="color: white; text-align: center;">{{m.status}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
   <!-- Services Section -->
   <section id="services">
     <h2>Our Services</h2>

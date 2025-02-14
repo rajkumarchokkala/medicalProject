@@ -264,3 +264,102 @@ body {
 .contact-form button:hover {
     background: #005f73;
 }
+
+
+.stats-box {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stats-content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+
+}
+
+.hospital-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.hospital-box {
+  background: linear-gradient(270deg, #4964fc, rgb(0, 16, 16));
+  // border: 1px solid #ddd;
+  // border-radius: 10px;
+  padding: 15px;
+  width: calc(33.333% - 20px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hospital-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.hospital-name, .hospital-location {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.hospital-name i, .hospital-location i {
+  margin-right: 10px;
+  color: #ffffff;
+}
+
+
+.order-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.order-box {
+  background-color: #33177b;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.order-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.maintenance-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.maintenance-box {
+  background-color: #33177b;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.maintenance-box table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.maintenance-box td {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ffffff;
+}
+
+.maintenance-box tr:first-child td {
+  font-weight: bold;
+}

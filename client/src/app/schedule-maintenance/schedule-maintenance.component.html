@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <div class="card">
     <div class="card-header">
       <h2>Schedule Maintenance</h2>
@@ -72,6 +72,119 @@
 
       <div *ngIf="showMessage" class="alert alert-success mt-3">
         {{ showMessage }}
+      </div>
+
+      <div *ngIf="showError" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2>Schedule Maintenance</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="scheduledDate">Scheduled Date</label>
+          <input type="text" id="scheduledDate" formControlName="scheduledDate" placeholder="DD-MM-YYYY">
+          <div *ngIf="
+            itemForm.get('scheduledDate')?.hasError('required') &&
+            itemForm.get('scheduledDate')?.touched
+            " class="error">
+            *Policy StartDate is required.
+          </div>
+          <div *ngIf="
+            itemForm.controls['scheduledDate'].invalid &&
+              (itemForm.controls['scheduledDate'].dirty ||
+              itemForm.controls['scheduledDate'].touched)
+            " class="error">
+            *Policy StartDate must be in DD-MM-YYYY.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="completedDate">Completed Date</label>
+          <input type="text" id="completedDate" formControlName="completedDate" placeholder="DD-MM-YYYY">
+          <div *ngIf="
+            itemForm.get('completedDate')?.hasError('required') &&
+            itemForm.get('completedDate')?.touched
+            " class="error">
+            *Policy EndDate is required.
+          </div>
+          <div *ngIf="
+              itemForm.controls['completedDate'].invalid &&
+                (itemForm.controls['completedDate'].dirty ||
+                itemForm.controls['completedDate'].touched)
+              " class="error">
+            *Policy EndDate must be in YYYY-MM-DD format.
+          </div>
+          <div *ngIf="
+              itemForm.errors?.['dateRangeInvalid'] && itemForm.get('completedDate')?.touched && itemForm.get('completedDate')?.touched
+            " class="error">
+            *End date must be greater than or equal to start date
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" class="form-control" formControlName="description" rows="3"
+            placeholder="Enter Description"></textarea>
+          <div *ngIf="itemForm.get('description')?.touched && itemForm.get('description')?.invalid"
+            class="invalid-feedback d-block">
+            *Description is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" class="form-control" formControlName="status">
+            <option value="" disabled>Please Choose Status</option>
+            <option *ngFor="let s of newStatus" value="s">{{s}}</option>
+          </select>
+          <div *ngIf="itemForm.get('status')?.touched && itemForm.get('status')?.invalid"
+            class="invalid-feedback d-block">
+            *Status is required.
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="hospitalId">Hospital</label>
+            <select id="hospitalId" class="form-control" (change)="loadEquipmentsForHospital($event)">
+              <option value="" disabled>Please Choose Hospital</option>
+              <option *ngFor="let h of hospitalList" [value]="h.id">{{ h.name }}</option>
+            </select>
+            <div *ngIf="itemForm.get('hospitalId')?.touched && itemForm.get('hospitalId')?.invalid"
+              class="invalid-feedback d-block">
+              *Hospital is required.
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="equipment">Equipment</label>
+            <select id="equipment" class="form-control">
+              <option value="" disabled>Please Choose Equipment</option>
+              <option *ngFor="let e of equipmentList" [value]="e.id">{{ e.name }}</option>
+            </select>
+            <div *ngIf="itemForm.get('equipment')?.touched && itemForm.get('equipment')?.invalid"
+              class="invalid-feedback d-block">
+              *Equipment is required.
+            </div>
+          </div>
+        </div>
+
+        <button style="margin: 10px;" type="submit" class="btn btn-primary"
+          [disabled]="itemForm.invalid">Submit</button>
+      </form>
+
+      <div *ngIf="showMessage" class="alert alert-success mt-3">
+        {{ successMessage }}
       </div>
 
       <div *ngIf="showError" class="alert alert-danger mt-3">
