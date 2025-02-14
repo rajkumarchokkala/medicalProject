@@ -1,0 +1,70 @@
+<table>
+    <thead>
+        <tr>
+            <th>Maintenance ID</th>
+            <th>Status</th>
+            <th>Feedback</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let m of maintenanceList">
+            <td>{{m.id}}</td>
+            <td>{{m.status}}</td>
+            <td><button (click)="addFeedback(m)">Feedback</button></td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="feedForm" class="custom-modal-overlay">
+    <h2 class="mt-5">Add Feedback</h2>
+    <div class="custom-modal">
+        <div class="custom-modal-header">
+            <h5 class="modal-title">Add Feedback</h5>
+            <button class="btn-close" (click)="closeshowRejectModal()">❌</button>
+        </div>
+        <div class="custom-modal-body">
+            <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="feedbackText">Feedback Text</label>
+                    <textarea id="feedbackText" formControlName="feedbackText" class="form-control" placeholder="Enter Feedback" [ngClass]="{'is-invalid': feedbackForm.get('feedbackText')?.invalid && feedbackForm.get('feedbackText')?.touched}">
+                    </textarea>
+                    <div *ngIf="feedbackForm.get('feedbackText')?.invalid && feedbackForm.get('feedbackText')?.touched"
+                        class="invalid-feedback">
+                        *Feedback is required
+                    </div>
+                </div>
+ 
+                <div class="form-group">
+                    <label for="rating">Rating:</label>
+                    <input id="rating" type="number" formControlName="rating" class="form-control" placeholder="Enter rating"
+                        [ngClass]="{'is-invalid': feedbackForm.get('rating')?.invalid && feedbackForm.get('rating')?.touched}">
+                    <div *ngIf="feedbackForm.get('rating')?.invalid && feedbackForm.get('rating')?.touched"
+                        class="invalid-feedback">
+                        *Rating is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="recommend">Rating:</label>
+                    <input type="radio" name="recommend" id="recommend" value="">Please Choose
+                    <input id="recommend" type="radio" name="recommend" value="Satisfied" formControlName="recommend" class="form-control">Satisfied
+                    <input id="recommend" type="radio" name="recommend" value="Not Satisfied" formControlName="recommend" class="form-control">Not Satisfied
+                    <div *ngIf="feedbackForm.get('recommend')?.invalid && feedbackForm.get('recommend')?.touched"
+                        class="invalid-feedback">
+                        *Choose whether to recommend or not
+                    </div>
+                </div>
+
+                <div class="custom-modal-footer">
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </div>
+            </form>
+            <div *ngIf="showMessage" class="alert alert-success mt-3">
+                {{ successMessage }}
+            </div>
+           
+            <div *ngIf="showError" class="alert alert-danger mt-3">
+                {{ errorMessage }}
+            </div>
+        </div>      
+    </div>
+</div>

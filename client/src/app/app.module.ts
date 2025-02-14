@@ -22,6 +22,9 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { OrdersComponent } from './orders/orders.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaintenanceStatusComponent } from './maintenance-status/maintenance-status.component';
+import { OrderStatusComponent } from './order-status/order-status.component';
+import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       ScheduleMaintenanceComponent,
       RequestequipmentComponent,
       MaintenanceComponent,
-      OrdersComponent
+      OrdersComponent,
+      MaintenanceStatusComponent,
+      OrderStatusComponent,
+      FeedbackFormComponent
   ],
   imports: [
     BrowserModule,

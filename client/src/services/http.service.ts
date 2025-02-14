@@ -44,8 +44,7 @@ export class HttpService {
       else {
         return [data];
       }
-    }));
-     
+    }));    
   }
 
   getorders():Observable<any> {
@@ -133,6 +132,46 @@ export class HttpService {
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`)
     return this.http.delete(this.serverName+`/api/technician/maintenance/`+maintenanceId,{headers:headers});
+  }
+
+  addFeedbackByMaintenanceId(details:any,maintenanceId: any): Observable<any>
+  {
+    const authToken = this.authService.getToken();
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', `Bearer ${authToken}`);
+    return this.http.post<any>(
+      `${this.serverName}/api/feedback/maintenance?maintenanceId=${maintenanceId}`,
+      details, // Body
+      { headers: headers }
+    );
+  }
+
+  addFeedbackByOrderId(details:any,orderId: any): Observable<any>
+  {
+    const authToken = this.authService.getToken();
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', `Bearer ${authToken}`);
+    return this.http.post<any>(
+      `${this.serverName}/api/feedback/order?orderId=${orderId}`,
+      details, // Body
+      { headers: headers }
+    );
+  }
+
+//   public getAllFeedbacksByUserId(userId:number):Observable<any>{
+//     return this.httpClient.get<any>(this.serverName+"/user/"+userId);
+//   }
+
+  public deleteFeedback(feedbackId:number):Observable<void>
+  {
+    return this.http.delete<void>(this.serverName+"/"+feedbackId);
+  }
+
+  public getFeedbacks():Observable<any>
+  {
+    return this.http.get<any>(this.serverName);
   }
 }
 
