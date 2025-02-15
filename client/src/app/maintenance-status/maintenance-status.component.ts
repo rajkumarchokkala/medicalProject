@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { Maintenance } from './maintenance';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -11,7 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class MaintenanceStatusComponent implements OnInit {
 
-  maintenanceList:Maintenance[]=[];
+  maintenanceList: any = [];
+  hospitalList=[];
   maintenanceId:any;
   feedbackForm!:FormGroup;
   feedForm:boolean=false;
@@ -35,20 +35,32 @@ export class MaintenanceStatusComponent implements OnInit {
         recommend:['',[Validators.required]]
       }
     )
-    this.getAllMaintenance();
+    this.getHospitals();
+    this.getMaintenance();
   }
 
-  getAllMaintenance()
+  getHospitals()
   {
-    this.httpService.getMaintenance().subscribe((data)=>
+    this.httpService.getHospital().subscribe((data)=>
+    {
+      this.hospitalList=data;
+    })
+  }
+
+  getMaintenance()
+  {
+    this.maintenanceList=this.httpService.getMaintenance().subscribe((data)=>
     {
       this.maintenanceList=data;
     })
   }
 
-  addFeedback(maintenance:Maintenance)
+  addFeedback(id:any)
   {
-    this.maintenanceId=maintenance.id;
+   
+    
+    this.maintenanceId=id;
+    console.log(this.maintenanceId);
     this.feedForm=true;
   }
 
@@ -59,10 +71,12 @@ export class MaintenanceStatusComponent implements OnInit {
 
   onSubmit()
   {
+    console.log("Before adding");
     this.httpService.addFeedbackByMaintenanceId(this.feedbackForm.value,this.maintenanceId).subscribe(
       {
         next:()=>
           {
+            console.log("After adding");
             this.showMessage=true;
             this.successMessage='Feedback submitted successfully!'
             this.feedbackForm.reset();

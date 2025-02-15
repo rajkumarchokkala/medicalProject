@@ -10,7 +10,7 @@
         <tr *ngFor="let m of maintenanceList">
             <td>{{m.id}}</td>
             <td>{{m.status}}</td>
-            <td><button (click)="addFeedback(m)">Feedback</button></td>
+            <td><button (click)="addFeedback(m.id)">Feedback</button></td>
         </tr>
     </tbody>
 </table>
@@ -23,7 +23,22 @@
         </div>
         <div class="custom-modal-body">
             <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
-                <div class="form-group">
+
+
+
+                <!-- <div class="form-group"><div class="form-group">
+                    <label for="hospital">Hospital Name</label>
+                     <select name="hospital" id="hospital">
+                        <option value="" disabled>Please Choose Hospital</option>
+                        <option *ngFor="let h of hospitalList" [value]="h.id">{{h.name}}</option>
+                     </select> -->
+
+                    <!-- <div *ngIf="feedbackForm.get('feedbackText')?.invalid && feedbackForm.get('feedbackText')?.touched"
+                        class="invalid-feedback">
+                        *Feedback is required
+                    </div> -->
+                <!-- </div> -->
+                    <div>
                     <label for="feedbackText">Feedback Text</label>
                     <textarea id="feedbackText" formControlName="feedbackText" class="form-control" placeholder="Enter Feedback" [ngClass]="{'is-invalid': feedbackForm.get('feedbackText')?.invalid && feedbackForm.get('feedbackText')?.touched}">
                     </textarea>
@@ -45,9 +60,9 @@
 
                 <div class="form-group">
                     <label for="recommend">Rating:</label>
-                    <input type="radio" name="recommend" id="recommend" value="">Please Choose
-                    <input id="recommend" type="radio" name="recommend" value="Satisfied" formControlName="recommend" class="form-control">Satisfied
-                    <input id="recommend" type="radio" name="recommend" value="Not Satisfied" formControlName="recommend" class="form-control">Not Satisfied
+                    <!-- <input type="radio" name="recommend" id="recommend" value="">Please Choose -->
+                    <input id="recommend" type="radio" name="recommend" value="Satisfied" formControlName="recommend">Satisfied
+                    <input id="recommend" type="radio" name="recommend" value="Not Satisfied" formControlName="recommend">Not Satisfied
                     <div *ngIf="feedbackForm.get('recommend')?.invalid && feedbackForm.get('recommend')?.touched"
                         class="invalid-feedback">
                         *Choose whether to recommend or not

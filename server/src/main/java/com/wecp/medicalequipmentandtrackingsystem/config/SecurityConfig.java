@@ -51,14 +51,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/hospital/equipment/{hospitalId}").hasAuthority("HOSPITAL")
                 .antMatchers(HttpMethod.POST, "/api/hospital/maintenance/schedule").hasAuthority("HOSPITAL")
                 .antMatchers(HttpMethod.POST, "/api/hospital/order").hasAuthority("HOSPITAL")
-                .antMatchers(HttpMethod.GET, "/api/technician/maintenance").hasAuthority("TECHNICIAN")
+                .antMatchers(HttpMethod.GET, "/api/technician/maintenance").hasAnyAuthority("TECHNICIAN","HOSPITAL")
                 .antMatchers(HttpMethod.DELETE, "/api/technician/maintenance/{maintenanceId}").hasAuthority("TECHNICIAN")
                 .antMatchers(HttpMethod.PUT, "/api/technician/maintenance/update/{maintenanceId}").hasAuthority("TECHNICIAN")
-                .antMatchers(HttpMethod.GET, "/api/supplier/orders").hasAuthority("SUPPLIER")
+                .antMatchers(HttpMethod.GET, "/api/supplier/orders").hasAnyAuthority("SUPPLIER","HOSPITAL")
                 .antMatchers(HttpMethod.PUT, "/api/supplier/order/update/{orderId}").hasAuthority("SUPPLIER")
                 .antMatchers(HttpMethod.POST, "/api/feedback/maintenance").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/feedback/order").permitAll()
-
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

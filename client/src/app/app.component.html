@@ -20,6 +20,14 @@
         <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/requestequipment']">Request Equipment</a>
 
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/maintenance-status']">View Maintenance Status</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/order-status']">View Order Status</a>
+      </li>
       
       <!-- <li class="nav-item">
         <a *ngIf="roleName === 'TECHNICIAN'" class="nav-link" [routerLink]="['/dashboard']">Home</a>
@@ -62,6 +70,6 @@
     </router-outlet>
     <!-- <a routerLink="/createhospital">Create Hospital</a> || <a routerLink="/schedulemaintenance">Schedule-Maintenance</a> || <a routerLink="/maintenance">Maintenance</a> -->
   </div>
-  <app-maintenance-status></app-maintenance-status>
+  <!-- <app-maintenance-status></app-maintenance-status> -->
 </body>
 

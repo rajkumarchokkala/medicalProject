@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
-import { Maintenance } from '../maintenance-status/maintenance';
-import { Order } from './order';
+
 
 @Component({
   selector: 'app-order-status',
@@ -11,7 +10,8 @@ import { Order } from './order';
 })
 export class OrderStatusComponent implements OnInit {
 
-  orderList:Order[]=[];
+  orderList:any[]=[];
+  hospitalList=[];
   orderId:any;
   feedbackForm!:FormGroup;
   feedForm:boolean=false;
@@ -35,7 +35,16 @@ export class OrderStatusComponent implements OnInit {
         recommend:['',[Validators.required]]
       }
     )
+    this.getHospitals();
     this.getAllOrders();
+  }
+
+  getHospitals()
+  {
+    this.httpService.getHospital().subscribe((data)=>
+    {
+      this.hospitalList=data;
+    })
   }
 
   getAllOrders()
@@ -46,7 +55,7 @@ export class OrderStatusComponent implements OnInit {
     })
   }
 
-  addFeedback(order:Order)
+  addFeedback(order:any)
   {
     this.orderId=order.id;
     this.feedForm=true;

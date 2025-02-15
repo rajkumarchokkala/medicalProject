@@ -29,8 +29,6 @@ const routes: Routes = [
   { path: 'orders', component: OrdersComponent },  
   {path:'maintenance-status',component:MaintenanceStatusComponent},
   {path:'order-status',component:OrderStatusComponent},
-  {path:'feedback-form/:id',component:FeedbackFormComponent},
-  {path:'feedback-form',component:FeedbackFormComponent},
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];

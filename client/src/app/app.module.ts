@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
  
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
  
  
 import { RegistrationComponent } from './registration/registration.component';
@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaintenanceStatusComponent } from './maintenance-status/maintenance-status.component';
 import { OrderStatusComponent } from './order-status/order-status.component';
 import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,

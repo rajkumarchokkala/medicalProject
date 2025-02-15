@@ -23,6 +23,15 @@
         </div>
         <div class="custom-modal-body">
             <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+
+                <!-- <div class="form-group">
+                    <label for="hospital">Hospital Name</label>
+                     <select name="hospital" id="hospital">
+                        <option value="" disabled>Please Choose Hospital</option>
+                        <option *ngFor="let h of hospitalList" [value]="h.id">{{h.name}}</option>
+                     </select>
+                </div> -->
+
                 <div class="form-group">
                     <label for="feedbackText">Feedback Text</label>
                     <textarea id="feedbackText" formControlName="feedbackText" class="form-control" placeholder="Enter Feedback" [ngClass]="{'is-invalid': feedbackForm.get('feedbackText')?.invalid && feedbackForm.get('feedbackText')?.touched}">
